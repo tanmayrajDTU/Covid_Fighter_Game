@@ -73,11 +73,18 @@ function init(){
         console.log("Mouse Pressed");
         player.moving = true;
     });
+    canvas.addEventListener('touchstart',function(){
+        console.log("Mouse Pressed");
+        player.moving = true;
+    });
     canvas.addEventListener('mouseup',function(){
         console.log("Mouse Released");
         player.moving = false;
     });
-
+    canvas.addEventListener('touchend',function(){
+        console.log("Mouse Released");
+        player.moving = false;
+    });
 }
 
 function isOverlap(rect1,rect2){
