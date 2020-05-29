@@ -1,15 +1,13 @@
 function load_images(){
     //player,virus,gem
     enemy_image = new Image;
-    enemy_image.src = "Assets/v1.png";
+    enemy_image.src = "Assets/c_virus.png";
 
     player_img = new Image;
     player_img.src = "Assets/superhero.png";
 
     gem_image = new Image;
-    gem_image.src = "Assets/gem.png";
-
-
+    gem_image.src = "Assets/r_gem.png";
 }
 
 
@@ -17,8 +15,8 @@ function init(){
     //define the objects that we will have in the game
     canvas = document.getElementById("mycanvas");
     console.log(canvas);
-    W = 700;
-    H = 400;
+    W = 950;
+    H = 550;
 
     canvas.width = W;
     canvas.height = H;
@@ -36,14 +34,14 @@ function init(){
 		speed : 35,
 	};
 	e2 = {
-		x : 300,
+		x : 450,
 		y : 150,
 		w : 60,
 		h : 60,
 		speed : 40,
 	};
 	e3 = {
-		x : 450,
+		x : 700,
 		y : 20,
 		w : 60,
 		h : 60,
@@ -55,8 +53,8 @@ function init(){
     player = {
 		x : 20,
 		y : H/2,
-		w : 60,
-		h : 60,
+		w : 70,
+		h : 70,
 		speed : 20,
         moving  : false,
         health : 100,
@@ -65,8 +63,8 @@ function init(){
 	gem = {
 		x : W-100,
 		y : H/2,
-		w : 60,
-		h : 60,
+		w : 100,
+		h : 100,
 	};
     //listen to events on the canvas
     canvas.addEventListener('mousedown',function(){
@@ -119,9 +117,9 @@ function draw(){
         pen.drawImage(enemy_image,enemy[i].x,enemy[i].y,enemy[i].w,enemy[i].h);
     }
 
-    pen.fillStyle = "white";
-    pen.fillText("Score "+player.health,10,10);
-
+    pen.fillStyle = "gold";
+    pen.fillText("Score: "+player.health,20,30);
+    pen.font = "25px Verdana";
 }
 
 function update(){
@@ -134,22 +132,20 @@ function update(){
 
     for(let i=0;i<enemy.length;i++){
         if(isOverlap(enemy[i],player)){
-            player.health -= 50;
+            player.health = -1;
             if(player.health <0){
                 console.log(player.health);
+                alert("Game Over " );
                 game_over = true;
-                alert("Game Over" + player.health);
+                return;
             }
         }
     }
-
-
-
     //overlap overlap
     if(isOverlap(player,gem)){
 
         console.log("You Won");
-        alert("You Won!");
+        alert("You Won!\nYour Score is "+ (player.health-20));
         game_over = true;
         return;
     }
@@ -168,6 +164,7 @@ function update(){
 function gameloop(){
     if(game_over==true){
         clearInterval(f);
+        return;
     }
     draw();
     update();
