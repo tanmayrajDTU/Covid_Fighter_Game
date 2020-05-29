@@ -33,21 +33,21 @@ function init(){
 		y : 50,
 		w : 60,
 		h : 60,
-		speed : 10,
+		speed : 35,
 	};
 	e2 = {
 		x : 300,
 		y : 150,
 		w : 60,
 		h : 60,
-		speed : 30,
+		speed : 40,
 	};
 	e3 = {
 		x : 450,
 		y : 20,
 		w : 60,
 		h : 60,
-		speed : 20,
+		speed : 30,
 	};
 
     enemy = [e1,e2,e3];
